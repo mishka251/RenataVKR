@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "lib": [
+      "es5",
+      "es2015",
+      "dom",
+      "es2015.core",
+      "es2015.collection",
+      "esnext",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "types": [
+      "node",
+      "webpack-env",
+    ],
+    "paths": {
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}
