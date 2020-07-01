@@ -1,0 +1,25 @@
+[{
+  "id": 1,
+  "name": "Ivanov",
+  "symptomsAtPriem": {
+    "2020-04-21": {
+      "1": "No",
+      "2": "Yes"
+    }
+  },
+  "medicinesAtPriem": {
+    "2020-04-01": {
+      "2": {
+        "dosa": "1 раз в день",
+        "price": 120
+      }
+    }
+  },
+  "illness": 2
+},{
+  "id": 2,
+  "name": "Vasya",
+  "symptomsAtPriem": {},
+  "medicinesAtPriem": {},
+  "illness": 3
+}]

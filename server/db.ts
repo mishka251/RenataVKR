@@ -1,33 +1,26 @@
-const MongoClient = require('mongodb').MongoClient;
+import { Medicine, Patient, Symptom, AllData, Illness } from './dbTypes';
+import { Db, MongoClient } from 'mongodb';
 
 const url = 'mongodb://localhost:27017/';
 const mongoClient = new MongoClient(url, { useNewUrlParser: true });
 
-function getPatientByName(name) {
-    return mongoClient.connect()
-        .then((client) => {
-            const db = client.db('db_test');
-            const collection = db.collection('patients');
-            const patient = collection.find({ name: name });
-            return patient;
-        })
-        .then((patient)=>{
-            return patient.toArray();
-        });
-}
 
-module.exports = getPatientByName;
-// mongoClient.connect(function (err, client) {
-//
-//     const db = client.db('usersdb');
-//     const collection = db.collection('users');
-//     let user = { name: 'Tom', age: 23 };
-//     collection.insertOne(user, function (err, result) {
-//
-//         if (err) {
-//             return console.log(err);
-//         }
-//         console.log(result.ops);
-//         client.close();
-//     });
-// });
+export function getAllData(): Promise<AllData> {
+    return mongoClient.connect()
+        .then<AllData>(async (client: MongoClient) => {
+            const db: Db = client.db('db_test');
+
+            const patients: Patient[] = await db.collection('patients').find().toArray();
+            const symptoms: Symptom[] = await db.collection('symptoms').find().toArray();
+            const medicines: Medicine[] = await db.collection('medicines').find().toArray();
+            const illness: Illness[] = await db.collection('illness').find().toArray();
+
+            const result: AllData = {
+                patients: patients,
+                symptoms: symptoms,
+                medicines: medicines,
+                illness: illness,
+            };
+            return result;
+        })
+}

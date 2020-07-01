@@ -1,5 +1,8 @@
 import Main from './Main/Main.vue';
 import About from "./About/About.vue";
+import Calculations from "./Calculations/Calculations.vue";
+
+require('bootstrap');
 
 console.log("Hello world");
 document.addEventListener('DOMContentLoaded', function () {
@@ -8,7 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
         new About({
             el: rootSelector,
         });
-    } else {
+    } else if (window.location.pathname === '/calc/') {
+        new Calculations({
+            el: rootSelector,
+        });
+    }else {
         new Main({
             el: rootSelector
         });
