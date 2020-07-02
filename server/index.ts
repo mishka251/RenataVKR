@@ -21,6 +21,14 @@ app.get('/calc/', (req: Request, res: Response) => {
     res.sendFile(HTML_FILE);
 });
 
+app.get('/graf/', (req: Request, res: Response) => {
+    res.sendFile(HTML_FILE);
+});
+
+app.get('/classes/', (req: Request, res: Response) => {
+    res.sendFile(HTML_FILE);
+});
+
 app.get('/getDbData/', (req: Request, res: Response) => {
     getAllData()
         .then((result: AllData) => {

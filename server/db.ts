@@ -2,7 +2,7 @@ import { Medicine, Patient, Symptom, AllData, Illness } from './dbTypes';
 import { Db, MongoClient } from 'mongodb';
 
 const url = 'mongodb://localhost:27017/';
-const mongoClient = new MongoClient(url, { useNewUrlParser: true });
+const mongoClient = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 export function getAllData(): Promise<AllData> {

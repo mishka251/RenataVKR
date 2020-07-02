@@ -1,6 +1,8 @@
 import Main from './Main/Main.vue';
 import About from "./About/About.vue";
 import Calculations from "./Calculations/Calculations.vue";
+import Graf from "./Graf/Graf.vue";
+import Classification from "./Classification/Classification.vue";
 
 require('bootstrap');
 
@@ -15,7 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
         new Calculations({
             el: rootSelector,
         });
-    }else {
+    } else if (window.location.pathname === '/graf/') {
+        new Graf({
+            el: rootSelector,
+        });
+    } else if (window.location.pathname === '/classes/') {
+        new Classification({
+            el: rootSelector,
+        });
+    } else {
         new Main({
             el: rootSelector
         });

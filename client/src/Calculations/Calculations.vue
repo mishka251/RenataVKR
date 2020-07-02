@@ -23,17 +23,17 @@
             <table>
                 <caption>Результаты осмотров</caption>
                 <tr>
-                    <td>date</td>
-                    <th v-for="symptom in allSymptoms">
-                        {{symptom.name}}
+                    <td>дата</td>
+                    <th v-for="symptom in allSymptoms"
+                        v-html="symptom.name">
                     </th>
                 </tr>
 
                 <tr v-for="(priemSymptoms, date) in selectedPatient.symptomsAtPriem"
                 >
-                    <td>{{date}}</td>
-                    <td v-for="symptom in allSymptoms">
-                        {{priemSymptoms[symptom.id]}}
+                    <td v-html="date"></td>
+                    <td v-for="symptom in allSymptoms"
+                        v-html="priemSymptoms[symptom.id]">
                     </td>
                 </tr>
             </table>
@@ -41,14 +41,14 @@
             <table>
                 <caption>Результаты осмотра</caption>
                 <tr>
-                    <td>date</td>
-                    <th v-for="symptom in allSymptoms">
-                        {{symptom.name}}
+                    <td>дата</td>
+                    <th v-for="symptom in allSymptoms"
+                        v-html="symptom.name">
                     </th>
                 </tr>
 
                 <tr>
-                    <td>{{today}}</td>
+                    <td v-html="today"></td>
                     <td v-for="symptom in allSymptoms">
                         <BFormSelect
                                 v-model="patientNewSymptoms[symptom.id]"
@@ -70,7 +70,7 @@
 
                 <tr v-for="(priemMedicine, date) in selectedPatient.medicinesAtPriem"
                 >
-                    <td>{{date}}</td>
+                    <td v-html="date"></td>
                     <td v-for="medicine in allMedicines">
                         {{priemMedicine[medicine.id]?priemMedicine[medicine.id].dosa:''}}
                     </td>
@@ -83,17 +83,17 @@
             <table>
                 <caption>Назначеине лекарства</caption>
                 <tr>
-                    <td>date</td>
+                    <td>дата</td>
                     <th v-for="medicine in medicinesForPatientIllness(selectedPatient)">
                         {{medicine.name}}
                     </th>
                     <th>
-                        price
+                        стоимость
                     </th>
                 </tr>
 
                 <tr>
-                    <td>{{today}}</td>
+                    <td v-html="today"></td>
                     <td v-for="medicine in medicinesForPatientIllness(selectedPatient)">
                         <BFormSelect
                                 v-model="patientNewMedicines[medicine.name]"
@@ -141,8 +141,8 @@
             }
         } = {};
 
-        illnessNameForId(id:number):string{
-            return this.allIllness.find((illness)=>illness.id===id).name;
+        illnessNameForId(id: number): string {
+            return this.allIllness.find((illness) => illness.id === id).name;
         }
 
         medicinesForPatientIllness(patient: Patient): Medicine[] {
@@ -196,7 +196,7 @@
 
         get today(): string {
             const now: Date = new Date();
-            return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+            return `${now.getFullYear()}&nbsp;-&nbsp;${now.getMonth() + 1}&nbsp;-&nbsp;${now.getDate()}`;
         }
 
         get totalPrice(): number {
