@@ -1,7 +1,7 @@
-import Main from './Main/Main.vue';
-import About from "./About/About.vue";
-import Calculations from "./Calculations/Calculations.vue";
-import Classification from "./Classification/Classification.vue";
+import Main from './Main.vue';
+import About from "./About.vue";
+import Calculations from "./Calculations.vue";
+import Classification from "./Classification.vue";
 
 require('bootstrap');
 
