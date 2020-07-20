@@ -56,4 +56,3 @@ export interface AllData {
     patients: Patient[],
     illness: Illness[],
 }
-

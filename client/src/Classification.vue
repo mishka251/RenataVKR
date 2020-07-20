@@ -9,7 +9,9 @@
                     <div class="d-flex flex-column">
                         <div
                                 class="flex-row"
-                                v-for="(selectedIllness, index) of selectedIllnesses">
+                                v-for="(selectedIllness, index) of selectedIllnesses"
+                                :key="selectedIllness.id"
+                        >
                             <BFormSelect
                                     v-model="selectedIllnesses[index]"
                                     :options="illnessForSelect"
@@ -50,7 +52,7 @@
             PatientsTable,
             BFormSelect,
             StatisticBar,
-        }
+        },
     })
     export default class Classification extends Vue {
         allMedicines: Medicine[] = [];
@@ -62,22 +64,22 @@
 
         selectedIllnesses: Illness[] = [];
 
-        get illnessForSelect() {
+        get illnessForSelect(): { value: Illness, text: string }[] {
             return this.allIllness.map((illness: Illness) => {
                 return {
                     value: illness,
                     text: parseNbsp(illness.name),
-                }
+                };
             });
         }
 
-
-        addSelected() {
+        addSelected(): void {
             this.selectedIllnesses.push(null);
         }
 
         loadData(): void {
             axios.get<AllData>('/getDbData/')
+            // eslint-disable-next-line promise/always-return
                 .then((result) => {
                     this.allMedicines = result.data.medicines;
                     this.allSymptoms = result.data.symptoms;
@@ -95,8 +97,7 @@
         mounted(): void {
             this.loadData();
         }
-
-    };
+    }
 </script>
 
 <style scoped lang="scss">

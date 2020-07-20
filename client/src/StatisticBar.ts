@@ -38,10 +38,10 @@ export default class StatisticBar extends Bar {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
+                        beginAtZero: true,
+                    },
+                }],
+            },
         };
         const chartData = {
             labels: labels,
@@ -53,10 +53,10 @@ export default class StatisticBar extends Bar {
                         'rgba(0, 0, 255, 1)',
                     ],
                     data: data,
-                }
-            ]
+                },
+            ],
         };
-        this.renderChart(chartData, options)
+        this.renderChart(chartData, options);
     }
 
     getPatientsCountForIllness(illness: Illness): number {

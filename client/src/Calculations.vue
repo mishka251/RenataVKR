@@ -24,18 +24,17 @@
     import { Vue, Component } from 'vue-property-decorator';
     import { Medicine, Patient, Symptom, AllData, Illness } from './dbTypes';
     import { BFormSelect } from 'bootstrap-vue';
-    import { Network as VueNetwork } from "vue2vis";
+    import { Network as VueNetwork } from 'vue2vis';
 
-    import { Node, Edge,  Options, Properties } from 'vis';
+    import { Node, Edge, Options, Properties } from 'vis';
     import PatientsTable from './PatientsTable.vue';
-
 
     @Component({
         components: {
             BFormSelect,
             VueNetwork,
             PatientsTable,
-        }
+        },
     })
     export default class Calculations extends Vue {
         allMedicines: Medicine[] = [];
@@ -47,7 +46,8 @@
 
         dataLoaded: boolean = false;
 
-        onClick(e: Properties) {
+        onClick(e: Properties):void {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const nodeIndex: number = e.nodes[0] as any;
             if (nodeIndex == undefined) {
                 return;
@@ -65,6 +65,7 @@
 
         loadData(): void {
             axios.get<AllData>('/getDbData/')
+            // eslint-disable-next-line promise/always-return
                 .then((result) => {
                     this.allMedicines = result.data.medicines;
                     this.allSymptoms = result.data.symptoms;
@@ -72,7 +73,6 @@
                     this.allIllness = result.data.illness;
                     this.selectedIllness = result.data.illness[1];
                     this.dataLoaded = true;
-
                 })
                 .catch((error) => {
                     console.error(error);
@@ -85,15 +85,14 @@
             return `${now.getFullYear()}&nbsp;-&nbsp;${now.getMonth() + 1}&nbsp;-&nbsp;${now.getDate()}`;
         }
 
-
         networkOptions: Options = {
             layout: {
                 hierarchical: {
-                    direction: "UD",
-                    sortMethod: "directed",
+                    direction: 'UD',
+                    sortMethod: 'directed',
                     nodeSpacing: 90,
-                    levelSeparation: 70
-                }
+                    levelSeparation: 70,
+                },
             },
             width: '600px',
             height: '400px',
@@ -178,9 +177,7 @@
                         physics: false,
                     };
                     edges.push(minusEdge);
-
                 });
-
             });
 
             return {
@@ -191,9 +188,8 @@
 
         mounted() {
             this.loadData();
-
         }
-    };
+    }
 </script>
 
 <style lang="scss" scoped>

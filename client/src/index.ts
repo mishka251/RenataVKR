@@ -1,11 +1,10 @@
 import Main from './Main.vue';
-import About from "./About.vue";
-import Calculations from "./Calculations.vue";
-import Classification from "./Classification.vue";
+import About from './About.vue';
+import Calculations from './Calculations.vue';
+import Classification from './Classification.vue';
 
 require('bootstrap');
 
-console.log("Hello world");
 document.addEventListener('DOMContentLoaded', function () {
     const rootSelector = '#vue-root';
     if (window.location.pathname === '/') {
@@ -22,8 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     } else {
         new Main({
-            el: rootSelector
+            el: rootSelector,
         });
     }
-
 });

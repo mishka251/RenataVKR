@@ -1,6 +1,6 @@
 module.exports = {
     plugins: [
-        'vue',
+       // 'vue',
         '@typescript-eslint',
         'sonarjs',
         'no-use-extend-native',
@@ -11,13 +11,13 @@ module.exports = {
         env: { es6: true },
         sourceType: 'module'
     },
-    settings: {
-        'import/resolver': {
-            'webpack': {
-                'config': './src/webpack.config.development.js'
-            }
-        }
-    },
+    // settings: {
+    //     'import/resolver': {
+    //         'webpack': {
+    //             'config': './client/webpack.config.ts'
+    //         }
+    //     }
+    // },
     root: true,
     env: {
         browser: true,
@@ -25,10 +25,10 @@ module.exports = {
         serviceworker: true
     },
     extends: [
-        'airbnb-base',
-        'plugin:vue/base',
+        //'airbnb-base',
+       // 'plugin:vue/base',
         'plugin:@typescript-eslint/recommended',
-        'plugin:vue/essential',
+       // 'plugin:vue/essential',
         'plugin:sonarjs/recommended',
         'plugin:promise/recommended',
 
