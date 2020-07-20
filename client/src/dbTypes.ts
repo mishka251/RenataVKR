@@ -30,9 +30,24 @@ export interface Patient {
 }
 
 export interface Illness {
-    id: number,
+    id: number;
     name: string;
     medicines: number[];
+    formalization: [
+        {
+            name: string,
+            weight: number,
+            childs: [
+                {
+                    name: string,
+                    weight: number,
+                    costPlus: number
+                    costMinus: number;
+                }
+            ]
+        }
+    ];
+    efficiency:number,
 }
 
 export interface AllData {

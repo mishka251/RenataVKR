@@ -1,6 +1,22 @@
 <template>
     <div>
-        <img src="/img/method.jpg" alt="method">
+        <h2>Формализация метода</h2>
+        <VueNetwork
+                v-if="network!=null"
+                :edges="network.edges"
+                :nodes="network.nodes"
+                :options="networkOptions"
+                @click="onClick"
+        ></VueNetwork>
+
+        <div></div>
+        <div v-if="dataLoaded">
+            Эффективность <span>{{selectedIllness.efficiency}}</span>
+        </div>
+        <PatientsTable
+
+        ></PatientsTable>
+        <!--        <img src="/img/method.jpg" alt="method">-->
     </div>
 </template>
 
@@ -9,10 +25,17 @@
     import { Vue, Component } from 'vue-property-decorator';
     import { Medicine, Patient, Symptom, AllData, Illness } from './dbTypes';
     import { BFormSelect } from 'bootstrap-vue';
+    import { Network as VueNetwork } from "vue2vis";
+
+    import { Node, Edge, Network as VisNetwork, Options, Properties } from 'vis';
+    import PatientsTable from './PatientsTable.vue';
+
 
     @Component({
         components: {
             BFormSelect,
+            VueNetwork,
+            PatientsTable,
         }
     })
     export default class Calculations extends Vue {
@@ -21,55 +44,24 @@
         allPatients: Patient[] = [];
         allIllness: Illness[] = [];
 
+        selectedIllness: Illness = null;
+
         dataLoaded: boolean = false;
 
-        selectedPatient: Patient = null;
-
-        patientNewSymptoms: { [key: string]: string } = {};
-
-        patientNewMedicines: {
-            [medicine: string]: {
-                name: string,
-                price: number
+        onClick(e: Properties) {
+            const nodeIndex: number = e.nodes[0] as any;
+            if (nodeIndex == undefined) {
+                return;
             }
-        } = {};
-
-        illnessNameForId(id: number): string {
-            return this.allIllness.find((illness) => illness.id === id).name;
-        }
-
-        medicinesForPatientIllness(patient: Patient): Medicine[] {
-            const patientIllnes: Illness =
-                this.allIllness.find((ilness: Illness) => {
-                    return ilness.id === patient.illness
-                });
-            return this.allMedicines.filter((medicine: Medicine) => {
-                return patientIllnes.medicines.includes(medicine.id)
-            });
-        }
-
-        medicinePriceForPriceForPriem(priemMedicine: Object): number {
-            return Object.keys(priemMedicine).reduce<number>((sum: number, medicine: string) => {
-                return sum + priemMedicine[medicine].price;
-            }, 0);
-        }
-
-        get patientsForSelect() {
-            return this.allPatients.map((patient: Patient) => ({
-                value: patient,
-                text: patient.id,
-            }));
-        }
-
-        symptomsForSelect(symptom: Symptom) {
-            return symptom.possibleValues;
-        }
-
-        medicinesDosesForSelect(medicine: Medicine) {
-            return Object.keys(medicine.dose).map((dose: string) => ({
-                value: { name: dose, price: medicine.dose[dose] },
-                text: dose,
-            }));
+            const node: Node = this.network.nodes[nodeIndex];
+            if (node.value == undefined) {
+                return;
+            }
+            if (node.value > 0) {
+                this.selectedIllness.efficiency += node.value * (1 - this.selectedIllness.efficiency);
+            } else {
+                this.selectedIllness.efficiency += node.value * (this.selectedIllness.efficiency);
+            }
         }
 
         loadData(): void {
@@ -79,7 +71,9 @@
                     this.allSymptoms = result.data.symptoms;
                     this.allPatients = result.data.patients;
                     this.allIllness = result.data.illness;
+                    this.selectedIllness = result.data.illness[1];
                     this.dataLoaded = true;
+
                 })
                 .catch((error) => {
                     console.error(error);
@@ -92,16 +86,113 @@
             return `${now.getFullYear()}&nbsp;-&nbsp;${now.getMonth() + 1}&nbsp;-&nbsp;${now.getDate()}`;
         }
 
-        get totalPrice(): number {
-            return Object.keys(this.patientNewMedicines)
-                .reduce<number>((sum: number, key: string) => {
-                    const price: number = this.patientNewMedicines[key].price;
-                    return sum + price;
-                }, 0);
+
+        networkOptions: Options = {
+            layout: {
+                hierarchical: {
+                    direction: "UD",
+                    sortMethod: "directed",
+                    nodeSpacing: 90,
+                    levelSeparation: 70
+                }
+            },
+            width: '600px',
+            height: '400px',
+            physics: false,
+        };
+
+        get network() {
+            if (this.selectedIllness == null) {
+                return null;
+            }
+            const nodes: Node[] = [];
+            const edges: Edge[] = [];
+            const root: Node = {
+                id: 0,
+                label: this.selectedIllness.name,
+                level: 0,
+                shape: 'ellipse',
+            };
+            nodes.push(root);
+            this.selectedIllness.formalization.forEach((child1) => {
+                const childNode: Node = {
+                    id: nodes.length,
+                    label: child1.name,
+                    level: 1,
+                    shape: 'box',
+                };
+                nodes.push(childNode);
+                const childEdge: Edge = {
+                    from: root.id,
+                    to: childNode.id,
+                    label: '' + child1.weight,
+                    physics: false,
+                };
+                edges.push(childEdge);
+
+                child1.childs.forEach((child2) => {
+                    const childNode2: Node = {
+                        id: nodes.length,
+                        label: child2.name,
+                        level: 2,
+                        shape: 'box',
+                    };
+                    nodes.push(childNode2);
+                    const childEdge2: Edge = {
+                        from: childNode.id,
+                        to: childNode2.id,
+                        label: '' + child2.weight,
+                        physics: false,
+                    };
+                    edges.push(childEdge2);
+
+                    const plusNode: Node = {
+                        id: nodes.length,
+                        label: 'Улучшение',
+                        level: 3,
+                        shape: 'ellipse',
+                        value: child1.weight * child2.weight * child2.costPlus,
+                    };
+                    nodes.push(plusNode);
+
+                    const plusEdge: Edge = {
+                        from: childNode2.id,
+                        to: plusNode.id,
+                        label: '' + child2.costPlus,
+                        physics: false,
+                    };
+                    edges.push(plusEdge);
+
+                    const minusNode: Node = {
+                        id: nodes.length,
+                        label: 'Ухудшение',
+                        shape: 'ellipse',
+                        level: 3,
+                        value: -child1.weight * child2.weight * child2.costMinus,
+                    };
+                    nodes.push(minusNode);
+
+                    const minusEdge: Edge = {
+                        from: childNode2.id,
+                        to: minusNode.id,
+                        label: '' + child2.costMinus,
+                        physics: false,
+                    };
+                    edges.push(minusEdge);
+
+                });
+
+            });
+
+            return {
+                edges,
+                nodes,
+            };
         }
 
         mounted() {
             this.loadData();
+
         }
     };
 </script>

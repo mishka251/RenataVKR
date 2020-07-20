@@ -1,37 +1,40 @@
-[{
-  "id": 3,
-  "name": "Ivanov",
-  "symptomsAtPriem": {
-    "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;21": {
-      "0": "80",
-      "1": "+",
-      "2": "+",
-      "3": "3",
-      "4": "0",
-      "5": "40"
-    },
-    "2020&nbsp;-&nbsp;05&nbsp;-&nbsp;21": {
-      "0": "хорошее",
-      "1": "нет",
-      "2": "нет",
-      "3": "да",
-      "4": "нет",
-      "5": "да"
-    }
-  },
-  "medicinesAtPriem": {
-    "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;01": {
-      "2": {
-        "dosa": "1 раз в день",
-        "price": 120
+[
+  {
+    "id": 3,
+    "name": "Ivanov",
+    "symptomsAtPriem": {
+      "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;21": {
+        "0": "80",
+        "1": "+",
+        "2": "+",
+        "3": "3",
+        "4": "0",
+        "5": "40"
+      },
+      "2020&nbsp;-&nbsp;05&nbsp;-&nbsp;21": {
+        "0": "хорошее",
+        "1": "нет",
+        "2": "нет",
+        "3": "да",
+        "4": "нет",
+        "5": "да"
       }
-    }
+    },
+    "medicinesAtPriem": {
+      "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;01": {
+        "2": {
+          "dosa": "1 раз в день",
+          "price": 120
+        }
+      }
+    },
+    "illness": 2
   },
-  "illness": 2
-},{
-  "id": 4,
-  "name": "Vasya",
-  "symptomsAtPriem": {},
-  "medicinesAtPriem": {},
-  "illness": 1
-}]
+  {
+    "id": 4,
+    "name": "Vasya",
+    "symptomsAtPriem": {},
+    "medicinesAtPriem": {},
+    "illness": 1
+  }
+]
