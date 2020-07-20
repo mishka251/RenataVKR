@@ -1,24 +1,88 @@
 [{
+  "_id": {
+    "$oid": "5efb9f9cc209bf1fe43feaca"
+  },
   "id": 1,
-  "name": "Старческая астения. Снижение базовой функциональной активности (индекс Бартел 50/100 баллов). Повторные падения. Мальнутриция. Империтвное недержание мочи умеренной степени.Хроническая сердечная недостаточность 2Б стадия, ФК 3 по NYHA.",
+  "name": "ХСН I",
   "medicines": [
     0,
     1,
     2,
     3
-  ]
+  ],
+  "formalization": [
+    {
+      "name": "Катопропил",
+      "weight": 0.55,
+      "childs": [
+        {
+          "name": "Лазикс",
+          "weight": 1,
+          "costPlus": 0.65,
+          "costMinus": 0.35
+        }
+      ]
+    },
+    {
+      "name": "Эналаприл",
+      "weight": 0.45,
+      "childs": [
+        {
+          "name": "Лазикс",
+          "weight": 0.6,
+          "costPlus": 0.7,
+          "costMinus": 0.3
+        },
+        {
+          "name": "Гипотиазид",
+          "weight": 0.4,
+          "costPlus": 0.6,
+          "costMinus": 0.4
+        }
+      ]
+    }
+  ],
+  "efficiency": 0.85
 },{
+  "_id": {
+    "$oid": "5efb9f9cc209bf1fe43feacb"
+  },
   "id": 2,
-  "name": "Депрессия",
+  "name": "ХСН II",
   "medicines": [
     5
-  ]
-},{
-  "id": 3,
-  "name": "Сахарный диабет",
-  "medicines": [
-    1,
-    3,
-    5
-  ]
+  ],
+  "formalization": [
+    {
+      "name": "Катопропил",
+      "weight": 0.55,
+      "childs": [
+        {
+          "name": "Лазикс",
+          "weight": 1,
+          "costPlus": 0.65,
+          "costMinus": 0.35
+        }
+      ]
+    },
+    {
+      "name": "Эналаприл",
+      "weight": 0.45,
+      "childs": [
+        {
+          "name": "Лазикс",
+          "weight": 0.6,
+          "costPlus": 0.7,
+          "costMinus": 0.3
+        },
+        {
+          "name": "Гипотиазид",
+          "weight": 0.4,
+          "costPlus": 0.6,
+          "costMinus": 0.4
+        }
+      ]
+    }
+  ],
+  "efficiency": 0.85
 }]

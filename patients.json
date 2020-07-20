@@ -1,40 +1,68 @@
-[
-  {
-    "id": 3,
-    "name": "Ivanov",
-    "symptomsAtPriem": {
-      "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;21": {
-        "0": "80",
-        "1": "+",
-        "2": "+",
-        "3": "3",
-        "4": "0",
-        "5": "40"
-      },
-      "2020&nbsp;-&nbsp;05&nbsp;-&nbsp;21": {
-        "0": "хорошее",
-        "1": "нет",
-        "2": "нет",
-        "3": "да",
-        "4": "нет",
-        "5": "да"
-      }
-    },
-    "medicinesAtPriem": {
-      "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;01": {
-        "2": {
-          "dosa": "1 раз в день",
-          "price": 120
-        }
-      }
-    },
-    "illness": 2
+[{
+  "_id": {
+    "$oid": "5ee1c296d3cca63e4ce7112b"
   },
-  {
-    "id": 4,
-    "name": "Vasya",
-    "symptomsAtPriem": {},
-    "medicinesAtPriem": {},
-    "illness": 1
-  }
-]
+  "id": 1,
+  "name": "Ivanov",
+  "symptomsAtPriem": {
+    "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;21": {
+      "0": "80",
+      "1": "+",
+      "2": "+",
+      "3": "3",
+      "4": "0",
+      "5": "40"
+    },
+    "2020&nbsp;-&nbsp;05&nbsp;-&nbsp;21": {
+      "0": "хорошее",
+      "1": "нет",
+      "2": "нет",
+      "3": "да",
+      "4": "нет",
+      "5": "да"
+    }
+  },
+  "medicinesAtPriem": {
+    "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;01": {
+      "2": {
+        "dosa": "1 раз в день",
+        "price": 120
+      }
+    }
+  },
+  "illness": 2
+},{
+  "_id": {
+    "$oid": "5ee1c296d3cca63e4ce7112c"
+  },
+  "id": 2,
+  "name": "Vasya",
+  "symptomsAtPriem": {},
+  "medicinesAtPriem": {},
+  "illness": 2
+},{
+  "_id": {
+    "$oid": "5f055d8cb17c763e48ca0b1a"
+  },
+  "id": 3,
+  "name": "Ivanov",
+  "symptomsAtPriem": {
+    "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;21": [],
+    "2020&nbsp;-&nbsp;05&nbsp;-&nbsp;21": []
+  },
+  "medicinesAtPriem": {
+    "2020&nbsp;-&nbsp;04&nbsp;-&nbsp;01": [
+      {}
+    ]
+  },
+  "illness": 2
+},{
+  "_id": {
+    "$oid": "5f055d8cb17c763e48ca0b1b"
+  },
+  "id": 4,
+  "name": "Vasya",
+  "symptomsAtPriem": {},
+  "medicinesAtPriem": {},
+  "illness": 1
+}]
