@@ -32,9 +32,6 @@
 
             </div>
         </div>
-
-
-        <img src="/img/test.png" alt="test">
     </div>
 </template>
 

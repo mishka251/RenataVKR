@@ -26,7 +26,7 @@
     import { BFormSelect } from 'bootstrap-vue';
     import { Network as VueNetwork } from "vue2vis";
 
-    import { Node, Edge, Network as VisNetwork, Options, Properties } from 'vis';
+    import { Node, Edge,  Options, Properties } from 'vis';
     import PatientsTable from './PatientsTable.vue';
 
 

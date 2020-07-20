@@ -1,13 +1,11 @@
-// import axios from 'axios';
-import { Component, Watch, Prop, Mixins, Vue } from 'vue-property-decorator';
+import { Component, Watch, Prop } from 'vue-property-decorator';
 import { Patient, Illness } from './dbTypes';
 
-import { Bar, mixins } from 'vue-chartjs';
+import { Bar } from 'vue-chartjs';
 import { parseNbsp } from './utils';
 
 @Component({
     extends: Bar, // this is important to add the functionality to your component
-    //mixins: [mixins.reactiveProp]
 })
 export default class StatisticBar extends Bar {
     @Prop({ type: Array }) patients: Patient[];
