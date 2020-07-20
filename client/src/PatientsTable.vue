@@ -16,7 +16,7 @@
 
 <script lang="ts">
     import axios from 'axios';
-    import { Vue, Component } from 'vue-property-decorator';
+    import { Vue, Component, Prop } from 'vue-property-decorator';
     import { Medicine, Patient, Symptom, AllData, Illness } from './dbTypes';
 
     require('bootstrap/scss/bootstrap.scss');
@@ -32,6 +32,11 @@
         allSymptoms: Symptom[] = [];
         allPatients: Patient[] = [];
         dataLoaded: boolean = false;
+
+        @Prop({
+            type: Boolean,
+            default: false,
+        }) useLastPriem!: boolean;
 
         get symptomsForTable(): BvTableField[] {
             return this.allSymptoms.map<BvTableField>((symptom) => {
@@ -49,7 +54,7 @@
                 if (priemDates.length == 0) {
                     return null;
                 }
-                let firstPriem: string = priemDates[0];
+                let firstPriem: string = this.useLastPriem ? priemDates[priemDates.length-1] : priemDates[0];
                 for (let i = 1; i < priemDates.length; i++) {
                     if (priemDates[i] < firstPriem) {
                         firstPriem = priemDates[i];
@@ -62,10 +67,8 @@
         loadData(): void {
             axios.get<AllData>('/getDbData/')
                 .then((result) => {
-                    // this.allMedicines = result.data.medicines;
                     this.allSymptoms = result.data.symptoms;
                     this.allPatients = result.data.patients;
-                    // this.allIllness = result.data.illness;
                     this.dataLoaded = true;
                 })
                 .catch((error) => {
@@ -81,10 +84,5 @@
         parseNbsp(text: string): string {
             return text.replace(new RegExp('&nbsp;', 'g'), '\u00A0');
         }
-
     };
 </script>
-
-<style scoped>
-
-</style>

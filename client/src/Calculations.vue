@@ -14,9 +14,8 @@
             Эффективность <span>{{selectedIllness.efficiency}}</span>
         </div>
         <PatientsTable
-
+                use-last-priem
         ></PatientsTable>
-        <!--        <img src="/img/method.jpg" alt="method">-->
     </div>
 </template>
 
